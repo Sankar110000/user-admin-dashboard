@@ -6,11 +6,13 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     try {
+      setLoading(true)
       e.preventDefault();
       const res = await fetch("https://project-backend-gd2d.onrender.com/api/user/login", {
         method: "POST",
@@ -35,6 +37,7 @@ function Login() {
           setEmail('')
           setPassword('')
       }
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -88,8 +91,9 @@ function Login() {
           <button
             type="submit"
             className="w-full py-2 px-4 text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition duration-200"
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in...": "Login" }
           </button>
         </form>
 

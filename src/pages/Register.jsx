@@ -6,11 +6,13 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setLoading(true)
       const res = await fetch("https://project-backend-gd2d.onrender.com/api/user/register", {
         method: "POST",
         headers: {
@@ -32,7 +34,7 @@ function Register() {
         setName('')
         setPassword('')
       }
-
+      setLoading(false)
     } catch (error) {
       console.log("Error:", error);
     }
@@ -100,8 +102,9 @@ function Register() {
           <button
             type="submit"
             className="w-full py-2 px-4 text-white bg-green-600 rounded-xl hover:bg-green-700 transition duration-200"
+            disabled= {loading}
           >
-            Register
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
 
