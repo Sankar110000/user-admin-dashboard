@@ -33,7 +33,7 @@ function UserDashboard() {
         localStorage.setItem("user", JSON.stringify(jsonRes.user))
         setIsEditing(false);
         toast.success(jsonRes.message)
-        navigate(0)
+        navigate("/dashboard")
     }
   };
   useEffect(() => {
